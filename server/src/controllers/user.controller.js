@@ -9,10 +9,10 @@ userCtrl.login = async (req, res) => {
             email
         }
     });
-    if(user.validPassword(password)) {
-        return res.json('user login ok');
+    if (await user.validPassword(password)) {
+        return res.json('Usuario login ok');
     } else {
-        res.json('Usuario/Password invalid');
+        return res.json('Usuario/Password invalid');
     }
 }
 
