@@ -43,5 +43,9 @@ module.exports = (sequelize, DataTypes) => {
         return await bcrypt.compare(password, this.password);
     }
 
+    User.associate = (db) => {
+        User.hasMany(db.Task);
+    }
+
     return User;
 }

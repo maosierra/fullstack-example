@@ -1,4 +1,5 @@
 const { User } = require('../database/models');
+const jwt = require('jsonwebtoken');
 
 const userCtrl = {}
 
@@ -10,9 +11,10 @@ userCtrl.login = async (req, res) => {
         }
     });
     if (await user.validPassword(password)) {
-        return res.json('Usuario login ok');
+        const token = jwt.sign({ name: user.name, id: user.id }, 'NocqVerXvLvLtyvquEJF');
+        return res.json(token);
     } else {
-        return res.json('Usuario/Password invalid');
+        return res.status(401).json('User/Password invalid');
     }
 }
 
