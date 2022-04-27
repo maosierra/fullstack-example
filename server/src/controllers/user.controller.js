@@ -11,8 +11,13 @@ userCtrl.login = async (req, res) => {
         }
     });
     if (user && await user.validPassword(password)) {
-        const token = jwt.sign({ email: user.email, id: user.id }, 'NocqVerXvLvLtyvquEJF');
-        return res.json(token);
+        try {
+            const token = jwt.sign({ email: user.email, id: user.id }, 'NocqVerXvLvLtyvquEJF');
+            return res.json(token);
+        } catch (error) {
+            return res.status(401).json('User/Password invalid');
+        }
+
     } else {
         return res.status(401).json('User/Password invalid');
     }
