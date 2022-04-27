@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         done: {
             type: DataTypes.BOOLEAN,
-            default: false
+            defaultValue: false
         }
     }, {
         tableName: 'tasks',
